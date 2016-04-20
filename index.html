@@ -5,42 +5,112 @@
     <link type="text/css" rel="stylesheet" href="./css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
     <meta charset="utf-8">
-    <meta http-equiv="refresh" content="2">
   </head>
   <body>
     <div class="wrapper">
       <div class="menu-container">
         <nav id="menu">
           <ul>
-            <li>Buraqueira</li>
-            <li>Anã</li>
-            <li>das neves</li>
-            <li> preta</li>
-            <li>serra afiada</li>
-            <li>caburé miudinho</li>
+            <a href="https://pt.wikipedia.org/wiki/Coruja-buraqueira" target="_blank"><li>Buraqueira</li></a>
+            <a href="https://pt.wikipedia.org/wiki/Coruja-an%C3%A3" target="_blank"><li>Anã</li></a>
+            <a href="https://pt.wikipedia.org/wiki/Coruja-das-neves" target="_blank"><li>das neves</li></a>
+            <a href="https://pt.wikipedia.org/wiki/Coruja-preta" target="_blank"><li> preta</li></a>
+            <a href="https://pt.wikipedia.org/wiki/Coruja-serra-afiada" target="_blank"><li>serra afiada</li></a>
+            <a href="http://www.wikiaves.com.br/cabure-miudinho" target="_blank"><li>caburé miudinho</li></a>
           </ul>
         </nav>
       </div>
     </div>
-      <div class="post">
-        <h1>Corujas</h1>
-        <img src="./imagem/coruja.jpg">
-          <p>O termo coruja é a designação comum das aves estrigiformes, das famílias dos titonídeos e estrigídeos.</p>
-          <p> Na região do Amazonas, algumas espécies também são chamadas de murutucu.</p>
-          <p> Tais aves possuem hábitos notívagos e voo silencioso devido à estrutura das penas.</p>
-          <p> alimentando-se de pequenos mamíferos (principalmente de roedores e morcegos), insetos e aranhas.</p>
-          <p> Engolem suas refeições por inteiro, para depois vomitarem pelotas com pêlos e fragmentos de ossos.</p>
-          <p> Os filhotes de corujas podem ser vítimas de outros predadores, como o gavião.</p>
-          <p>As corujas podem girar sua cabeça e pescoço em até 270º em qualquer direção</p>
-          <p>e apesar do tamanho do seus olhos, elas não conseguem mexer os seus globos oculares.</p>
-          <p>O símbolo da Deusa grega da sabedoria, Atena, é uma coruja do género Athene: o mocho-galego.</p>
-          <p> Também considerada o símbolo da filosofia.</p>
-            <div class ="social">
-                <a href="https://www.facebook.com/nataliacostadsouza"target="_blank"><img src="./imagem/face.png"></a>
-                <a href="https://twitter.com/"target="_blank"><img src="./imagem/tt.png"></a>
-                <a href="https://www.instagram.com/becauseinrome/"target="_blank"><img src="./imagem/insta.png"></a>
-            </div>
+
+    <div class="post">
+
+      <h1>Corujas</h1>
+
+    <div class="carouselbox">
+      <div class="buttons">
+        <button class="prev">
+           ◀ <span class="offscreen">Previous</span>
+        </button>
+        <button class="next">
+          <span class="offscreen">Next</span> ▶
+        </button>
       </div>
-  </body>
-  <footer></footer>
+      <ol class="content">
+        <li><img src="./imagem/coruja.jpg"/></li>
+        <li><img src="./imagem/coruja2.jpg"/></li>
+        <li><img src="./imagem/coruja3.jpg"/></li>
+      </ol>
+    </div> <!-- end of carouselbox -->
+
+              <p>O termo coruja é a designação comum das aves estrigiformes, das famílias dos titonídeos e estrigídeos.</p>
+              <p> Na região do Amazonas, algumas espécies também são chamadas de murutucu.</p>
+              <p> Tais aves possuem hábitos notívagos e voo silencioso devido à estrutura das penas.</p>
+              <p> alimentando-se de pequenos mamíferos (principalmente de roedores e morcegos), insetos e aranhas.</p>
+              <p> Engolem suas refeições por inteiro, para depois vomitarem pelotas com pêlos e fragmentos de ossos.</p>
+              <p> Os filhotes de corujas podem ser vítimas de outros predadores, como o gavião.</p>
+              <p>As corujas podem girar sua cabeça e pescoço em até 270º em qualquer direção</p>
+              <p>e apesar do tamanho do seus olhos, elas não conseguem mexer os seus globos oculares.</p>
+              <p>O símbolo da Deusa grega da sabedoria, Atena, é uma coruja do género Athene: o mocho-galego.</p>
+              <p> Também considerada o símbolo da filosofia.</p>
+                <div class ="social">
+                    <a href="https://www.facebook.com/nataliacostadsouza"target="_blank"><img src="./imagem/face.png"></a>
+                    <a href="https://twitter.com/"target="_blank"><img src="./imagem/tt.png"></a>
+                    <a href="https://www.instagram.com/becauseinrome/"target="_blank"><img src="./imagem/insta.png"></a>
+                </div>
+    </div> <!-- end of post -->
+
+
+<script>
+carousel = (function(){
+  // Read necessary elements from the DOM once
+  var box = document.querySelector('.carouselbox');
+  var next = box.querySelector('.next');
+  var prev = box.querySelector('.prev');
+  // Define the global counter, the items and the
+  // current item
+  var counter = 0;
+  var items = box.querySelectorAll('.content li');
+  var amount = items.length;
+  var current = items[0];
+  box.classList.add('active');
+  // navigate through the carousel
+  function navigate(direction) {
+    // hide the old current list item
+    current.classList.remove('current');
+
+    // calculate th new position
+    counter = counter + direction;
+    // if the previous one was chosen
+    // and the counter is less than 0
+    // make the counter the last element,
+    // thus looping the carousel
+    if (direction === -1 &&
+      counter < 0) {
+      counter = amount - 1;
+    }
+    // if the next button was clicked and there
+    // is no items element, set the counter
+    // to 0
+    if (direction === 1 &&
+        !items[counter]) {
+      counter = 0;
+    }
+    // set new current element
+    // and add CSS class
+    current = items[counter];
+    current.classList.add('current');
+  }
+  // add event handlers to buttons
+  next.addEventListener('click', function(ev) {
+    navigate(1);
+  });
+  prev.addEventListener('click', function(ev) {
+    navigate(-1);
+  });
+  // show the first element
+  // (when direction is 0 counter doesn't change)
+  navigate(0);
+})();
+</script>
+</body>
 </html>
